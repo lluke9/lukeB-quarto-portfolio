@@ -1,0 +1,167 @@
+---
+title: "Simple Matplotlib Portfolio"
+format: html
+---
+
+## Welcome to My Portfolio! 
+Hello! My nickname is lukeB. This is my Quarto data visualization
+portfolio showcasing my Python and matplotlib skills.  
+
+## About This Portfolio
+This portfolio demonstrates how Quarto can seamlessly integrate Python code and visualiza-
+tions into professional documents. Each chart below is created using matplotlib and embedded
+directly into this document.  
+
+## About Matplotlib
+
+**Matplotlib** is a comprehensive Python library for creating static, animated, and interactive visualizations. It was created by John D. Hunter in 2003 and has become one of the most popular data visualization tools in the Python ecosystem.
+
+### Why Matplotlib is Useful
+
+- **Versatility**: Matplotlib supports a wide range of plot types including line plots, bar charts, scatter plots, histograms, and more
+- **Integration**: Works seamlessly with NumPy, Pandas, and other scientific computing libraries
+- **Customization**: Offers extensive customization options for colors, fonts, layouts, and styling
+- **Publication-Quality**: Can produce publication-quality figures suitable for academic papers and reports
+- **Wide Adoption**: Industry standard tool used in data science, research, and analytics
+- **Flexibility**: Can be used in scripts, notebooks, and interactive environments like Jupyter
+
+---
+
+## Simple Line Chart
+
+Let's create a simple line chart showing some sample data:
+
+```{python}
+#| label: fig-line-chart
+#| fig-cap: "A simple line plot"
+#| output: true
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Create some data
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+
+# Create the plot
+plt.figure(figsize=(8, 6))
+plt.plot(x, y, 'b-', linewidth=2, label='sin(x)')
+plt.xlabel('X axis')
+plt.ylabel('Y axis')
+plt.title('Simple Sinusoidal Graph')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+---
+
+## Bar Chart
+
+A bar chart is great for comparing categorical data. Here's an example:
+
+```{python}
+#| label: fig-bar-chart
+#| fig-cap: "A simple bar chart"
+#| output: true
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Sample data
+categories = ['Data Science', 'Web Development', 'Machine Learning', 'Visualization', 'Automation Itself is']
+values = [85, 70, 90, 75, 95]
+
+# Create the bar chart
+plt.figure(figsize=(10, 6))
+bars = plt.bar(categories, values, color=['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7'])
+plt.xlabel('Skill Categories')
+plt.ylabel('Proficiency Level')
+plt.title('My Python Skills Portfolio')
+plt.ylim(0, 100)
+
+# Add value labels on top of bars
+for bar in bars:
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2., height,
+             f'{int(height)}',
+             ha='center', va='bottom')
+
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.show()
+```
+
+---
+
+## Scatter Plot
+
+Scatter plots are ideal for showing relationships between two continuous variables:
+
+```{python}
+#| label: fig-scatter-plot
+#| fig-cap: "A scatter plot showing correlation"
+#| output: true
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Generate sample data with some correlation
+np.random.seed(42)
+x = np.random.randn(100)
+y = 2 * x + np.random.randn(100) * 0.5
+
+# Create the scatter plot
+plt.figure(figsize=(8, 6))
+plt.scatter(x, y, alpha=0.6, c='steelblue', s=50, edgecolors='black', linewidth=0.5)
+plt.xlabel('Variable X')
+plt.ylabel('Variable Y')
+plt.title('Scatter Plot: Relationship Between Variables')
+plt.grid(True, alpha=0.3)
+
+# Add a trend line
+z = np.polyfit(x, y, 1)
+p = np.poly1d(z)
+plt.plot(x, p(x), "r--", alpha=0.8, linewidth=2, label='Trend Line')
+plt.legend()
+plt.show()
+```
+
+---
+
+## Pie Chart
+
+Pie charts are perfect for showing proportional data and percentages:
+
+```{python}
+#| label: fig-pie-chart
+#| fig-cap: "A pie chart showing distribution"
+#| output: true
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Sample data
+categories = ['Python', 'JavaScript', 'R', 'SQL', 'Other']
+sizes = [35, 25, 15, 15, 10]
+colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7']
+explode = (0.1, 0, 0, 0, 0)  # explode the largest slice
+
+# Create the pie chart
+fig, ax = plt.subplots(figsize=(9, 9))
+wedges, texts, autotexts = ax.pie(sizes, explode=explode, labels=categories, colors=colors,
+                                   autopct='%1.1f%%', shadow=True, startangle=90)
+
+# Customize text
+for autotext in autotexts:
+    autotext.set_color('white')
+    autotext.set_fontweight('bold')
+    autotext.set_fontsize(12)
+
+for text in texts:
+    text.set_fontsize(12)
+    text.set_fontweight('bold')
+
+plt.title('Programming Languages Usage Distribution', fontsize=16, fontweight='bold', pad=20)
+plt.show()
+```
